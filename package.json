@@ -1,0 +1,23 @@
+{
+  "dependencies": {
+    "@whiskeysockets/baileys": "^6.6.0",
+    "cfonts": "^3.2.0",
+    "chalk": "^5.3.0",
+    "cli-spinners": "^2.9.2",
+    "express": "^4.18.2",
+    "qrcode-terminal": "^0.12.0",
+    "whatsapp-web.js": "^1.23.0",
+    "yt-search": "^2.10.4",
+    "ytdl-core": "^4.11.5"
+  },
+  "name": "authwhatsapp",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
