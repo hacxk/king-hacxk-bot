@@ -18,7 +18,7 @@ module.exports = {
     apiKeys: {
         youtube: 'your-youtube-api-key',
         database: 'your-database-access-token',
-        openai: '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' // Add your OpenAI API key
+        openai: 'YOUR_OPENAI_API_KEY_HERE' // Add your OpenAI API key
         // Add more API keys or access tokens as needed
     },
 
