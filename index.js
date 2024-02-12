@@ -6,7 +6,7 @@ const qrcode = require('qrcode-terminal');
 const Spinner = require('cli-spinners');
 const readline = require('readline');
 
-const adminNumbers = ['94773255188']; // Add more admin numbers if needed
+
 
 let spinnerInterval; // Variable to store the interval of the spinner animation
 let messagesInterval; // Variable to store the interval for displaying "Looking for new messages"
