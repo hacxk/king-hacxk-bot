@@ -1,48 +1,41 @@
-const { MessageMedia } = require('whatsapp-web.js');
-const ytdl = require('ytdl-core');
+// Import necessary modules
+const axios = require('axios');
 
-// Function to handle YouTube video download
-exports.downloadVideo = async (client, message, args) => {
-    try {
-        const url = args[0]; // Assuming the URL is the first argument
-        if (!url) {
-            await client.sendMessage(message.from, 'Please provide a YouTube URL.');
-            return;
+// Function to download YouTube video
+async function downloadYouTubeVideo(client, message, videoId) {
+    // React to the message indicating that the download process has started
+    await message.react('⏳');
+
+    // Configure the request options
+    const options = {
+        method: 'GET',
+        url: 'https://ytstream-download-youtube-videos.p.rapidapi.com/dl',
+        params: { id: videoId },
+        headers: {
+            'X-RapidAPI-Key': 'fb8072fc19mshf4f46f35d532694p1e66f2jsn8ac7a5558aed',
+            'X-RapidAPI-Host': 'ytstream-download-youtube-videos.p.rapidapi.com'
         }
+    };
 
-        // React to indicate the process has started
-        await message.react('⏳');
+    try {
+        // Send the request
+        const response = await axios.request(options);
 
-        // Fetch video info
-        const info = await ytdl.getInfo(url);
-
-        // Choose video format (e.g., highest quality)
-        const format = ytdl.chooseFormat(info.formats, { quality: 'highest' });
-
-        // Download the video
-        const videoStream = ytdl(url, { format: format });
-
-        // Convert stream to buffer
-        const videoBuffer = await streamToBuffer(videoStream);
-
-        // Send video as a message
-        const media = new MessageMedia('video/mp4', videoBuffer, 'video.mp4');
-        await client.sendMessage(message.from, media, { caption: 'Here is your video!' });
-
-        // React to indicate the process has finished
+        // React to the message indicating that the download is complete
         await message.react('✅');
-    } catch (error) {
-        console.error('Error downloading video:', error);
-        await client.sendMessage(message.from, 'An error occurred while processing your request.');
-    }
-};
 
-// Helper function to convert stream to buffer
-const streamToBuffer = async (stream) => {
-    return new Promise((resolve, reject) => {
-        const chunks = [];
-        stream.on('data', (chunk) => chunks.push(chunk));
-        stream.on('error', reject);
-        stream.on('end', () => resolve(Buffer.concat(chunks)));
-    });
-};
+        // Return the download links
+        return response.data;
+    } catch (error) {
+        // Handle errors
+        console.error('Error downloading YouTube video:', error.response.data);
+
+        // React to the message indicating that an error occurred
+        await message.react('❌');
+
+        return null;
+    }
+}
+
+// Export the function
+module.exports = { downloadYouTubeVideo };
