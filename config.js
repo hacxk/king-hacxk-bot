@@ -17,7 +17,8 @@ module.exports = {
     // API Keys and Tokens
     apiKeys: {
         youtube: 'your-youtube-api-key',
-        database: 'your-database-access-token'
+        database: 'your-database-access-token',
+        openai: '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' // Add your OpenAI API key
         // Add more API keys or access tokens as needed
     },
 
@@ -45,7 +46,7 @@ module.exports = {
     // Bot Behavior Configuration
     behavior: {
         autoRespond: true, // Enable automatic response to incoming messages
-        greetingMessage: 'Hello! I am MyWhatsAppBot. How can I assist you today?', // Initial greeting message
+        greetingMessage: 'Hello! I am HACXK BOT. How can I assist you today?', // Initial greeting message
         commandPrefix: '.', // Prefix used to identify bot commands in messages
         timeout: {
             message: 30, // Timeout for message responses in seconds
